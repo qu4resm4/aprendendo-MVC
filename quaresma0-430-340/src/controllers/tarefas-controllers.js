@@ -1,19 +1,26 @@
-import express from "express";
-const app = express();
-class tarefas {
-    static tarefaController(app) {
+import Tarefa from "../models/Tarefa.js";
+import { bdTarefas } from "../infra/db.js"
+
+class tarefaController {
+    static rotas(app) {
+        // Rota para o recurso tarefa
         app.get('/tarefa', (req, res) => {
             console.log(req)
-            res.send("Rota ativada com o GET e NODEMON")
+            res.send(bdTarefas)
         })
             
         app.post('/tarefa', (req, res) => {
-            const { funcionario, idade, cargo, CPF} = req.body
 
-            console.log(funcionario, idade, cargo, CPF)
+            const { titulo, descricao, status, data} = req.body
+            const tarefaInserir = new Tarefa (titulo, descricao, status, data)
+
+            bdTarefas.push(tarefaInserir)
+            
+            new Tarefa(titulo, descricao, status, data)
+            console.log(titulo, descricao, status, data)
             res.send("ROTA COM POST")
         })
-        };
     };
+};
 
-export default tarefas
+export default tarefaController

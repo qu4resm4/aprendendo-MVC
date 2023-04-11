@@ -1,5 +1,5 @@
 import express from "express";
-import tarefas from "./controllers/tarefas-controllers.js";
+import tarefaController from "./controllers/tarefas-controllers.js";
 import usuarios from "./controllers/usuarios-controllers.js";
 
 
@@ -12,7 +12,7 @@ const app = express();
         res.send("<h1>Página Inicial</h1>")
     })
 
-tarefas.tarefaController(app);
+tarefaController.rotas(app);
 usuarios.usuariosController(app);
 
 export default app
